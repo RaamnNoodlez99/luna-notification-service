@@ -14,10 +14,7 @@ _dotenv["default"].config();
 (0, _notificationsDB.dbConnection)();
 var app = (0, _express["default"])();
 exports["default"] = app;
-app.use((0, _cors["default"])({
-  credentials: true,
-  origin: ["http://localhost:4200"]
-}));
+app.use((0, _cors["default"])());
 app.use(_express["default"].json());
 app.use('/api/notifications', _notifications["default"]);
 app.get('/api/welcome', function (req, res) {
@@ -25,7 +22,7 @@ app.get('/api/welcome', function (req, res) {
     message: 'Welcome to the notifications service!'
   });
 });
-var port = 3004;
+var port = process.env.PORT || 3004;
 var server = app.listen(port, function () {
   console.log("Server running on http://localhost:".concat(port));
 });
